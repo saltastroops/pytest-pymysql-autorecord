@@ -90,4 +90,4 @@ def pymysql_snapshot_mock(
     yield db_mock_fixture
 
     if is_storing:
-        db_mock_fixture.write_data()
+        db_mock_fixture._write_data()

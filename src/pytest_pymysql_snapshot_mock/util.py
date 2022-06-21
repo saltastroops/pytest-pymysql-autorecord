@@ -41,7 +41,7 @@ class DatabaseMockFixture:
         self._original_datadir = original_datadir
 
         if mode == Mode.MOCK:
-            self._data = self.read_data()
+            self._data = self._read_data()
         else:
             self._data = defaultdict(list)
 
@@ -58,20 +58,20 @@ class DatabaseMockFixture:
         elif self._mode == Mode.NORMAL:
             return value
 
-    def write_data(self) -> None:
+    def _write_data(self) -> None:
         filepath = self._filepath()
         with open(filepath, "wb") as f:
             pickle.dump(self._data, f)
 
-    def read_data(self) -> Dict[str, List[Any]]:
+    def _read_data(self) -> Dict[str, List[Any]]:
         filepath = self._filepath()
         with open(filepath, "rb") as f:
             return cast(Dict[str, List[Any]], pickle.load(f))
 
-    def record(self, key: str, value: Any) -> None:
+    def _record_value(self, key: str, value: Any) -> None:
         self._data[key].append(value)
 
-    def read(self, key: str) -> Any:
+    def _read_value(self, key: str) -> Any:
         return self._data[key].pop(0)
 
     def _filepath(self) -> Path:
