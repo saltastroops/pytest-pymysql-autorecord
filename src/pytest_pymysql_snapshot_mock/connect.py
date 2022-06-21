@@ -4,11 +4,11 @@ import pymysql
 from pymysql import err
 from pymysql.protocol import MysqlPacket
 
-from .util import DatabaseMockFixture, Mode
+from .util import DatabaseMock, Mode
 
 
 class _MockCursor:
-    def __init__(self, database_mock: DatabaseMockFixture):
+    def __init__(self, database_mock: DatabaseMock):
         self._database_mock = database_mock
 
     def _read(self, key: str) -> Any:
@@ -126,7 +126,7 @@ class _MockCursor:
 
 class _RecordingCursor:
     def __init__(
-        self, database_mock: DatabaseMockFixture, cursorclass: Any, *args: Any, **kwargs: Any
+        self, database_mock: DatabaseMock, cursorclass: Any, *args: Any, **kwargs: Any
     ):
         self._database_mock = database_mock
         self._cursor = cursorclass(*args, **kwargs)
@@ -249,7 +249,7 @@ class _RecordingCursor:
 class _MockConnection:
     def __init__(
             self,
-            database_mock: DatabaseMockFixture
+            database_mock: DatabaseMock
     ):
         self._database_mock = database_mock
 
@@ -362,7 +362,7 @@ class _MockConnection:
 class _RecordingConnection:
     def __init__(
         self,
-        database_mock: DatabaseMockFixture,
+        database_mock: DatabaseMock,
         connection: Any,
         cursorclass: Any,
     ):
@@ -524,14 +524,14 @@ class _RecordingConnection:
     NotSupportedError = err.NotSupportedError
 
 
-def _recording_mock_cursorclass(database_mock: DatabaseMockFixture, cursorclass: Any) -> Any:
+def _recording_mock_cursorclass(database_mock: DatabaseMock, cursorclass: Any) -> Any:
     def f(*args: Any, **kwargs: Any) -> Any:
         return _RecordingCursor(database_mock, cursorclass, *args, **kwargs)
 
     return f
 
 
-def mock_connect(database_mock: DatabaseMockFixture, real_connect: Any) -> Any:
+def mock_connect(database_mock: DatabaseMock, real_connect: Any) -> Any:
     """
     Return a mock connect function.
 

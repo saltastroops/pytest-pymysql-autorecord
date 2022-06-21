@@ -16,7 +16,7 @@ class Mode(enum.Enum):
     NORMAL = "Normal"
 
 
-class DatabaseMockFixture:
+class DatabaseMock:
     """
     Properties and methods for the database mock fixture.
 

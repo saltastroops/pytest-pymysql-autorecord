@@ -9,7 +9,7 @@ from pathlib import Path
 from pytest import FixtureRequest, MonkeyPatch
 
 from .connect import mock_connect
-from .util import DatabaseMockFixture, Mode
+from .util import DatabaseMock, Mode
 
 
 
@@ -83,7 +83,7 @@ def database_mock(
     else:
         mode = Mode.NORMAL
 
-    db_mock_fixture = DatabaseMockFixture(mode, original_datadir, request)
+    db_mock_fixture = DatabaseMock(mode, original_datadir, request)
     connect = mock_connect(db_mock_fixture, pymysql.connect)
     monkeypatch.setattr(pymysql, "connect", connect)
 
