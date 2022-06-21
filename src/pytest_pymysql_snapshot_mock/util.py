@@ -3,7 +3,7 @@ import pickle
 import re
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List, Any, cast
+from typing import Any, Dict, List, cast
 
 from pytest import FixtureRequest
 
@@ -35,7 +35,12 @@ class DatabaseMock:
         The mode in which the fixture is used.
     """
 
-    def __init__(self, mode: Mode, original_datadir: Path, request: FixtureRequest, ):
+    def __init__(
+        self,
+        mode: Mode,
+        original_datadir: Path,
+        request: FixtureRequest,
+    ):
         self._mode = mode
         self._request = request
         self._original_datadir = original_datadir
@@ -46,7 +51,7 @@ class DatabaseMock:
             self._data = defaultdict(list)
 
     @property
-    def mode(self):
+    def mode(self) -> Mode:  # noqa: D102
         return self._mode
 
     def user_value(self, value: Any) -> Any:
@@ -86,10 +91,10 @@ class DatabaseMock:
 
         """
         if self._mode == Mode.STORE_DATA:
-            self._data[f"user--stored-value"].append(value)
+            self._data["user--stored-value"].append(value)
             return value
         elif self._mode == Mode.MOCK:
-            return self._data[f"user--stored-value"].pop(0)
+            return self._data["user--stored-value"].pop(0)
         elif self._mode == Mode.NORMAL:
             return value
 
@@ -115,4 +120,3 @@ class DatabaseMock:
         self._original_datadir.mkdir(exist_ok=True)
 
         return self._original_datadir / (basename + ".db")
-

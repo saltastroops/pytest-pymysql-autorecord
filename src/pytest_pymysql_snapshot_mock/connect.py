@@ -1,4 +1,4 @@
-from typing import Any, List, Dict
+from typing import Any
 
 import pymysql
 from pymysql import err
@@ -247,10 +247,7 @@ class _RecordingCursor:
 
 
 class _MockConnection:
-    def __init__(
-            self,
-            database_mock: DatabaseMock
-    ):
+    def __init__(self, database_mock: DatabaseMock):
         self._database_mock = database_mock
 
     def _read(self, key: str) -> Any:
@@ -567,7 +564,9 @@ def mock_connect(database_mock: DatabaseMock, real_connect: Any) -> Any:
                 )
             c = real_connect(*args, **kwargs)
             return _RecordingConnection(
-                database_mock=database_mock, connection=c, cursorclass=kwargs["cursorclass"]
+                database_mock=database_mock,
+                connection=c,
+                cursorclass=kwargs["cursorclass"],
             )
         elif mode == Mode.MOCK:
             return _MockConnection(database_mock=database_mock)

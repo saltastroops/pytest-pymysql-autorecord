@@ -1,6 +1,5 @@
 from .util import DatabaseMock
 
-
 __version__ = "0.0.1"
 
 
