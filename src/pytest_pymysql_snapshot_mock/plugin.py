@@ -38,7 +38,7 @@ def pytest_addoption(parser):
 
 
 @pytest.fixture(autouse=True)
-def pymysql_snapshot_mock(
+def database_mock(
     original_datadir: Path, request: FixtureRequest, monkeypatch: MonkeyPatch
 ) -> Generator[None, None, None]:
     """
