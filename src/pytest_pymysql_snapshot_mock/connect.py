@@ -256,19 +256,12 @@ class _MockConnection:
     def read(self, key: str) -> Any:
         return self._database_mock.read(f"connection--{key}")
 
-    # @property
-    # def _result(self):
-    #     return self._connection._result
-
     def __enter__(self) -> Any:
         return self
 
     def __exit__(self, *exc_info: Any) -> None:
         del exc_info
         self.close()
-
-    # def _create_ssl_ctx(self, sslp):
-    #     return self._connection._create_ssl_ctx(sslp)
 
     def close(self) -> None:
         pass
@@ -318,21 +311,8 @@ class _MockConnection:
     def escape_string(self, s: Any) -> Any:
         return self.read("escape_string")
 
-    # def _quote_bytes(self, s):
-    #     return self._connection._quote_bytes(s)
-
     def cursor(self, cursor: Any = None) -> Any:
         return _MockCursor(database_mock=self._database_mock)
-
-    # The following methods are INTERNAL USE ONLY (called from Cursor)
-    # def query(self, sql, unbuffered=False):
-    #     return self._connection.query(sql, unbuffered)
-
-    # def next_result(self, unbuffered=False):
-    #     return self._connection.next_result(unbuffered)
-
-    # def affected_rows(self):
-    #     return self._connection.affected_rows()
 
     def kill(self, thread_id: Any) -> Any:
         return self.read("kill")
@@ -349,34 +329,9 @@ class _MockConnection:
     def write_packet(self, payload: Any) -> None:
         pass
 
-    # def _read_packet(self, packet_type=MysqlPacket):
-    #     return self._connection._read_packet(packet_type)
-
-    # def _read_bytes(self, num_bytes):
-    #     return self._connection._read_bytes(num_bytes)
-
-    # def _write_bytes(self, data):
-    #     self._connection._write_bytes(data)
-
-    # def _read_query_result(self, unbuffered=False):
-    #     return self._connection._read_query_result(unbuffered)
-
     def insert_id(self) -> Any:
         return self.read("insert_id")
 
-    # def _execute_command(self, command, sql):
-    #     pass
-
-    # def _request_authentication(self):
-    #     pass
-
-    # def _process_auth(self, plugin_name, auth_packet):
-    #     return self._connection._process_auth(plugin_name, auth_packet)
-
-    # def _get_auth_plugin_handler(self, plugin_name):
-    #     return self._connection._get_auth_plugin_handler(plugin_name)
-
-    # _mysql support
     def thread_id(self) -> Any:
         return self.read("thread_id")
 
@@ -388,9 +343,6 @@ class _MockConnection:
 
     def get_proto_info(self) -> Any:
         return self.read("get_proto_info")
-
-    # def _get_server_information(self):
-    #     self._connection._get_server_information()
 
     def get_server_info(self) -> Any:
         return self.read("get_server_info")
@@ -542,7 +494,6 @@ class _RecordingConnection:
     def _get_auth_plugin_handler(self, plugin_name: Any) -> Any:
         return self._connection._get_auth_plugin_handler(plugin_name)
 
-    # _mysql support
     def thread_id(self) -> Any:
         return self.record("thread_id", self._connection.thread_id)
 
