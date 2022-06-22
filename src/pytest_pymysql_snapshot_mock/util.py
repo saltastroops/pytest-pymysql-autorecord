@@ -9,7 +9,10 @@ from pytest import FixtureRequest
 
 
 class Mode(enum.Enum):
-    """An enumeration of the available modes."""
+    """An enumeration of the available modes.
+
+    The available modes are ``STORE_DATA``, ``MOCK`` and ``NORMAL``.
+    """
 
     STORE_DATA = "Store Data"
     MOCK = "Mock"
@@ -70,7 +73,7 @@ class DatabaseMock:
 
            import uuid
 
-           random_value = database_mock.user_value(str(uuid.v4())
+           random_value = database_mock.user_value(str(uuid.uuid4())
 
         When database data is stored, ``value`` is stored along with the data, and it is
         returned as the return value. When the database is mocked, the previously stored
