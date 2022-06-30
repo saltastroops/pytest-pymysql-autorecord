@@ -6,7 +6,7 @@ While this generally is good advice, it isn't always feasible. If your database 
 
 Hence, there may be a point in testing against "real" data. This works fine while testing on your own machine with access to the real database. But the moment you want to run tests on, say, GitHub, you run into a snag. From a security point of view, GitHub shouldn't have access to your database.
 
-One way to solve the issue would be to use a local CI/CD pipeline, such as setting up a workflow o Jenkins. Another option would be to disable such tests when run on GitHub, which would fly against the idea of Continuous Integration.
+One way to solve the issue would be to use a local CI/CD pipeline, such as setting up a workflow on Jenkins. Another option would be to disable such tests when run on GitHub, which would fly against the idea of Continuous Integration.
 
 pytest-pymysql-snapshot-mock offers another way out of the dilemma, which is inspired by snapshot testing and by HTTP request interception. This plugin stores data returned by the database, and subsequently uses the stored data for mocking. You get the best of both world: You have the benefit of testing against real-world data, but you don't need the database when running tests on a remote server.
 
@@ -40,7 +40,7 @@ pytest will automatically pick up the plugin.
 
 ## Using the plugin
 
-When you run pytest after installing pytest-pymysql-snapshot-mock, you will see no change; yiur real database connection is used and no data is stored.
+When you run pytest after installing pytest-pymysql-snapshot-mock, you will see no change;  your real database connection is used and no data is stored.
 
 However, this changes if you run pytest with the `--store-db-data` flag.
 
@@ -68,7 +68,7 @@ If you test with a "real" database, your tests may have to use random data. For 
 
 But this poses a problem for mocking. Imagine that your test is checking that the created user has the correct username. When you run the test, a new username is generated, but the mocked database data contains the previously generated username. Clearly the two differ and the test fails.
 
-To solve this issue, pytest-pymysql-snapshot-mock offers a fixture `database_mock` with a `user_value` method. If nbo mocking is used, this method returns the value passed to it, and if database data is being stored, it also saves this value. However, if the database is being mocked, `user_value` ignores its argument and instead returns the previously stored value.
+To solve this issue, pytest-pymysql-snapshot-mock offers a fixture `database_mock` with a `user_value` method. If no mocking is used, this method returns the value passed to it, and if database data is being stored, it also saves this value. However, if the database is being mocked, `user_value` ignores its argument and instead returns the previously stored value.
 
 The following example illustrates how the `user_value` method can be used.
 
