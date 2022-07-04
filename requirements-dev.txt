@@ -6,8 +6,10 @@ isort
 mypy
 myst-nb
 numpydoc
+pymysql
 pytest
 sphinx
 sphinx-autobuild
 sphinx-autodoc-typehints
 sphinx-book-theme
+types-PyMySQL
