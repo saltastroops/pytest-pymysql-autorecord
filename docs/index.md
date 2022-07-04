@@ -1,6 +1,6 @@
 # pytest-pymysql-snapshot-mock
 
-Lorem ipsum.
+A plugin for mocking with recorded database data.
 
 ```{toctree}
 ---
