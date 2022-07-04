@@ -28,6 +28,12 @@ There is a second caveat: pytest-pymysql-snapshot-mock assumes that, within a te
 This plugin is *not* thread-safe. If a given test accesses the database in a non-deterministic manner (such as by using multiple connections), it may fail.
 ```
 
+An important limitation should also be pointed out:
+
+```{warning}
+This plugin currently only works the first time you connect to a SQL Alchemy database engine. You therefore have to make sure that you create a new engine for every test.
+```
+
 ## Installation
 
 You can install the plugin in the usual way with pip:
