@@ -1,6 +1,6 @@
 # pytest-pymysql-snapshot-mock
 
-Mock PyMySQL with snapshots.
+A plugin for mocking with recorded database data.
 
 ```{toctree}
 ---
@@ -9,5 +9,7 @@ maxdepth: 2
 caption: Content
 ---
 
+quickstart
+api
 development
 ```
