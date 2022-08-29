@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from typing import Generator
 
@@ -31,11 +32,17 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         dest="mock_db_data",
         help="Use previously stored data instead of connecting to the database.",
     )
+    group.addoption(
+        "--db-data-dir",
+        action="store",
+        dest="db_data_dir",
+        help="Directory where to store the snapshots for database mocking."
+    )
 
 
 @pytest.fixture(autouse=True)
 def database_mock(
-    original_datadir: Path, request: FixtureRequest, monkeypatch: MonkeyPatch
+    request: FixtureRequest, monkeypatch: MonkeyPatch
 ) -> Generator[DatabaseMock, None, None]:
     """
     Mock PyMySQL's connect function.
@@ -53,7 +60,11 @@ def database_mock(
     A test fails if you use the ``--mock-db-data`` flag, but no data has been stored for
     the test yet.
 
-    The ``--store-db-data`` and ``--mock-db-data`` flag cannot be used together.
+    The ``--store-db-data`` and ``--mock-db-data`` flag cannot be used together. If you
+    use either of them, you have to use the ``--db-data-dir`` flag as well. Its value
+    must be the path of the directory where the snapshot files are stored. This
+    directory is created if necessary. Alternatively, you vcan set the environment
+    variable ``PMSM_DB_DATA_DIR``.
 
     Parameters
     ----------
@@ -66,12 +77,19 @@ def database_mock(
     """
     is_storing = request.config.option.store_db_data
     is_mocking = request.config.option.mock_db_data
+    db_data_dir = Path(request.config.option.db_data_dir) if request.config.option.db_data_dir else None
+    if not db_data_dir and os.getenv("PMSM_DATA_DIR") is not None:
+        db_data_dir = Path(os.getenv("PMSM_DATA_DIR"))
 
     if is_storing and is_mocking:
         pytest.fail(
             "The command line flags --store-db-data and --mock-db-data are "
             "mutually exclusive."
         )
+    if (is_storing or is_mocking) and not db_data_dir:
+        pytest.fail("The command line option --db-data-dir must be used with the "
+                    "--store-db-data or --mock-db-data flag. Alternatively, you can "
+                    "set the environment variable PMSM_DATA_DIR.")
 
     if is_storing:
         mode = Mode.STORE_DATA
@@ -80,7 +98,7 @@ def database_mock(
     else:
         mode = Mode.NORMAL
 
-    db_mock_fixture = DatabaseMock(mode, original_datadir, request)
+    db_mock_fixture = DatabaseMock(mode, db_data_dir, request)
     connect = mock_connect(db_mock_fixture, pymysql.connect)
     monkeypatch.setattr(pymysql, "connect", connect)
 

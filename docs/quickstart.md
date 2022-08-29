@@ -48,24 +48,26 @@ pytest will automatically pick up the plugin.
 
 When you run pytest after installing pytest-pymysql-snapshot-mock, you will see no change;  your real database connection is used and no data is stored.
 
-However, this changes if you run pytest with the `--store-db-data` flag.
+However, this changes if you run pytest with the `--store-db-data` flag. When doing so, you also have to use the `--db-data-dir` option with the path of the directory where the database snapshot files are to be stored.
 
 ```shell
-pytest --store-db-data
+pytest --store-db-data --db-data-dir /path/to/test-db-data/
 ```
 
+As an alternative to the `--db-data-dir` option you can set the environment variable `PMSM_DATA_DIR`. If both the command line option and the environment variable are defined, the value of the command line option is used.
+ 
 Now for every test file a directory is generated, and these new directories contain data files for every test run.
 
 ```{note}
 These directories and files are also created if a test doesn't use the database at all. This might be improved in a future version.
 ```
 
-The generated files should be put under version control. (Remember the warning above: They contain database data. Make sure they do not contain confidential information!)
+The generated files should be put under version control. (Remember the warning above: They contain database data. Make sure they do not contain confidential information, or that the repository for them is private.)
 
-In order to mock the database and use the previously stored data, you need to run pytest with the `--mock-db-data` flag.
+In order to mock the database and use the previously stored data, you need to run pytest with the `--mock-db-data` flag. Again the `--db-data-dir` option is required as well, unless the environment variable `PMSM_DATA_DIR` is set.
 
 ```shell
-pytest --mock-db-data
+pytest --mock-db-data --db-data-dir /path/to/test-db-data/
 ```
 
 ### Handling random data
@@ -88,4 +90,8 @@ def test_create_user(database_mock):
     }
     store_user(user)
     assert fetch_user(username) == user
+```
+
+```{warning}
+When you use the `user_value` method, you have to store the database data again. Otherwise you might get an ewrror about popping from an empty list.
 ```
