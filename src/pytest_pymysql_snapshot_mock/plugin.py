@@ -63,7 +63,7 @@ def database_mock(
     The ``--store-db-data`` and ``--mock-db-data`` flag cannot be used together. If you
     use either of them, you have to use the ``--db-data-dir`` flag as well. Its value
     must be the path of the directory where the snapshot files are stored. This
-    directory is created if necessary. Alternatively, you vcan set the environment
+    directory is created if necessary. Alternatively, you can set the environment
     variable ``PMSM_DB_DATA_DIR``.
 
     Parameters

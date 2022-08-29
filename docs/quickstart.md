@@ -93,5 +93,5 @@ def test_create_user(database_mock):
 ```
 
 ```{warning}
-When you use the `user_value` method, you have to store the database data again. Otherwise you might get an ewrror about popping from an empty list.
+When you use the `user_value` method, you have to store the database data again. Otherwise you might get an error about popping from an empty list.
 ```
