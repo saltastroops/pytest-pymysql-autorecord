@@ -1,6 +1,7 @@
 import enum
 import pickle
 import re
+import tempfile
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, List, cast
@@ -27,8 +28,8 @@ class DatabaseMock:
     ----------
     mode: `~pytest_pymysql_snapshot_mock.util.Mode`
         The mode in which the fixture is used.
-    original_datadir: `~pathlib.Path`
-        Directory containing the test file which is being executed.
+    db_data_dir: `~pathlib.Path`
+        Directory for storing the database snapshot files.
     request: `~pytest.FixtureRequest`
         pytest request fixture.
 
@@ -41,12 +42,12 @@ class DatabaseMock:
     def __init__(
         self,
         mode: Mode,
-        original_datadir: Path,
+        db_data_dir: Path,
         request: FixtureRequest,
     ):
         self._mode = mode
         self._request = request
-        self._original_datadir = original_datadir
+        self._data_dir = DatabaseMock._test_data_dir(db_data_dir, request)
 
         if mode == Mode.MOCK:
             self._data = self._read_data()
@@ -101,6 +102,13 @@ class DatabaseMock:
         elif self._mode == Mode.NORMAL:
             return value
 
+    @staticmethod
+    def _test_data_dir(db_data_dir: Path, request: FixtureRequest) -> Path:
+        if not db_data_dir:
+            return Path(tempfile.gettempdir())
+        parent_dir = request.path.parent.relative_to(request.config.rootpath)
+        return db_data_dir / parent_dir
+
     def _write_data(self) -> None:
         filepath = self._filepath()
         with open(filepath, "wb") as f:
@@ -120,6 +128,6 @@ class DatabaseMock:
     def _filepath(self) -> Path:
         # Adapted from the pytest-regressions source code
         basename = re.sub(r"[\W]", "_", self._request.node.name)
-        self._original_datadir.mkdir(exist_ok=True)
+        self._data_dir.mkdir(parents=True, exist_ok=True)
 
-        return self._original_datadir / (basename + ".db")
+        return self._data_dir / (basename + ".db")

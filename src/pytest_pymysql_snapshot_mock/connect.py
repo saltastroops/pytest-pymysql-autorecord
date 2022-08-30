@@ -12,7 +12,10 @@ class _MockCursor:
         self._database_mock = database_mock
 
     def _read(self, key: str) -> Any:
-        return self._database_mock._read_value(f"cursor--{key}")
+        value = self._database_mock._read_value(f"cursor--{key}")
+        if isinstance(value, Exception):
+            raise value
+        return value
 
     @property
     def connection(self) -> Any:
@@ -132,8 +135,12 @@ class _RecordingCursor:
         self._cursor = cursorclass(*args, **kwargs)
 
     def _record(self, key: str, f: Any, *args: Any, **kwargs: Any) -> Any:
-        res = f(*args, **kwargs)
-        self._database_mock._record_value(f"cursor--{key}", res)
+        try:
+            res = f(*args, **kwargs)
+            self._database_mock._record_value(f"cursor--{key}", res)
+        except Exception as e:
+            self._database_mock._record_value(f"cursor--{key}", e)
+            raise
         return res
 
     @property
