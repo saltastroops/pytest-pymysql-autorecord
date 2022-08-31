@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Quickstart &#8212; pytest-pymysql-snapshot-mock  documentation</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="pytest-pymysql-snapshot-mock" href="index.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">pytest-pymysql-snapshot-mock  documentation</h1>
+  
+</a>
+</div><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent" role="heading">
+ <span class="caption-text">
+  Content
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Quickstart
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="api.html">
+   API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="development.html">
+   Development
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/quickstart.md.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#before-you-use-this-plugin">
+   Before you use this plugin
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installation">
+   Installation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-the-plugin">
+   Using the plugin
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#handling-random-data">
+     Handling random data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#skipping-tests">
+   Skipping tests
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <section id="quickstart">
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading">¶</a></h1>
+<p>Most texts on software testing suggest, with good reason, to use mocking if the code under testing uses a database, or to create (fake) entries for the test.</p>
+<p>While this generally is good advice, it isn’t always feasible. If your database contains hundreds of tables, creating fake data may be more pain than gain.</p>
+<p>Hence, there may be a point in testing against “real” data. This works fine while testing on your own machine with access to the real database. But the moment you want to run tests on, say, GitHub, you run into a snag. From a security point of view, GitHub shouldn’t have access to your database.</p>
+<p>One way to solve the issue would be to use a local CI/CD pipeline, such as setting up a workflow on Jenkins. Another option would be to disable such tests when run on GitHub, which would fly against the idea of Continuous Integration.</p>
+<p>pytest-pymysql-snapshot-mock offers another way out of the dilemma, which is inspired by snapshot testing and by HTTP request interception. This plugin stores data returned by the database, and subsequently uses the stored data for mocking. You get the best of both world: You have the benefit of testing against real-world data, but you don’t need the database when running tests on a remote server.</p>
+<p>As the name suggests, pytest-pymysql-snapshot-mock is a pytest plugin for mocking PyMySQL. Other database drivers, whether for MySQL or not, are not supported.</p>
+<section id="before-you-use-this-plugin">
+<h2>Before you use this plugin<a class="headerlink" href="#before-you-use-this-plugin" title="Permalink to this heading">¶</a></h2>
+<p>Real-world business data has a tendency of being confidential. A stern warning is thus in order:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This plugin stores database data in files which are intended to be under version control and as such might end up under version control. Make sure you don’t use it when requesting confidential data, or that the project using the plugin is not availsable on a public repository. As explained below, there is a way to skip tests in case this plugin is used.</p>
+</div>
+<p>It might be a good idea to test against a database whose (still real-world) data has been sanitized, with confidential data such as email addresses and password hashes having been replaced.</p>
+<p>There is a second caveat: pytest-pymysql-snapshot-mock assumes that, within a test, your database access is deterministic, i.e. database requests are always executed in the same order. More precisely, it assumes that calls to any given method of a PyMySQL connection or cursor will always have the same order. Hence:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This plugin is <em>not</em> thread-safe. If a given test accesses the database in a non-deterministic manner (such as by using multiple connections), it may fail.</p>
+</div>
+<p>An important limitation should also be pointed out:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This plugin currently only works the first time you connect to a SQL Alchemy database engine. You therefore have to make sure that you create a new engine for every test.</p>
+</div>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
+<p>You can install the plugin in the usual way with pip:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m pip install pytest-pymysql-snapshot-mock
+</pre></div>
+</div>
+<p>pytest will automatically pick up the plugin.</p>
+</section>
+<section id="using-the-plugin">
+<h2>Using the plugin<a class="headerlink" href="#using-the-plugin" title="Permalink to this heading">¶</a></h2>
+<p>When you run pytest after installing pytest-pymysql-snapshot-mock, you will see no change;  your real database connection is used and no data is stored.</p>
+<p>However, this changes if you run pytest with the <code class="docutils literal notranslate"><span class="pre">--store-db-data</span></code> flag. When doing so, you also have to use the <code class="docutils literal notranslate"><span class="pre">--db-data-dir</span></code> option with the path of the directory where the database snapshot files are to be stored.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pytest --store-db-data --db-data-dir /path/to/test-db-data/
+</pre></div>
+</div>
+<p>As an alternative to the <code class="docutils literal notranslate"><span class="pre">--db-data-dir</span></code> option you can set the environment variable <code class="docutils literal notranslate"><span class="pre">PMSM_DATA_DIR</span></code>. If both the command line option and the environment variable are defined, the value of the command line option is used.</p>
+<p>Now for every test file a directory is generated, and these new directories contain data files for every test run.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These directories and files are also created if a test doesn’t use the database at all. This might be improved in a future version.</p>
+</div>
+<p>The generated files should be put under version control. (Remember the warning above: They contain database data. Make sure they do not contain confidential information, or that the repository for them is private.)</p>
+<p>In order to mock the database and use the previously stored data, you need to run pytest with the <code class="docutils literal notranslate"><span class="pre">--mock-db-data</span></code> flag. Again the <code class="docutils literal notranslate"><span class="pre">--db-data-dir</span></code> option is required as well, unless the environment variable <code class="docutils literal notranslate"><span class="pre">PMSM_DATA_DIR</span></code> is set.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pytest --mock-db-data --db-data-dir /path/to/test-db-data/
+</pre></div>
+</div>
+<section id="handling-random-data">
+<h3>Handling random data<a class="headerlink" href="#handling-random-data" title="Permalink to this heading">¶</a></h3>
+<p>If you test with a “real” database, your tests may have to use random data. For example, consider creating users with the constraint that their username is unique in the database. If you use a fixed username, you have to delete the new user after every test run. But this is potentially brittle and more pain than gain. So you would rather generate a different, random username for each test run.</p>
+<p>But this poses a problem for mocking. Imagine that your test is checking that the created user has the correct username. When you run the test, a new username is generated, but the mocked database data contains the previously generated username. Clearly the two differ and the test fails.</p>
+<p>To solve this issue, pytest-pymysql-snapshot-mock offers a fixture <code class="docutils literal notranslate"><span class="pre">database_mock</span></code> with a <code class="docutils literal notranslate"><span class="pre">user_value</span></code> method. If no mocking is used, this method returns the value passed to it, and if database data is being stored, it also saves this value. However, if the database is being mocked, <code class="docutils literal notranslate"><span class="pre">user_value</span></code> ignores its argument and instead returns the previously stored value.</p>
+<p>The following example illustrates how the <code class="docutils literal notranslate"><span class="pre">user_value</span></code> method can be used.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uuid</span>
+
+<span class="k">def</span> <span class="nf">test_create_user</span><span class="p">(</span><span class="n">database_mock</span><span class="p">):</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">database_mock</span><span class="o">.</span><span class="n">user_value</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())[:</span><span class="mi">8</span><span class="p">])</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">username</span>
+    <span class="p">}</span>
+    <span class="n">store_user</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">fetch_user</span><span class="p">(</span><span class="n">username</span><span class="p">)</span> <span class="o">==</span> <span class="n">user</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When you use the <code class="docutils literal notranslate"><span class="pre">user_value</span></code> method, you have to store the database data again. Otherwise you might get an error about popping from an empty list.</p>
+</div>
+</section>
+</section>
+<section id="skipping-tests">
+<h2>Skipping tests<a class="headerlink" href="#skipping-tests" title="Permalink to this heading">¶</a></h2>
+<p>There are cases where you cannot use database mocking. For example, you might be concerned about storing confidential data, or a test might access the database non-deterministically.</p>
+<p>Such tests should be skipped whenever database data is being stored or mocked. You can achieve this by calling the <code class="docutils literal notranslate"><span class="pre">skip_for_db_mocking</span></code> function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytest_pymysql_snapshot_mock</span> <span class="kn">import</span> <span class="n">skip_for_db_mocking</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">confidential_data_from_database</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">test_some_non_deterministic_function</span><span class="p">():</span>
+    <span class="n">skip_for_db_mocking</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="n">f</span><span class="p">()</span> <span class="o">==</span> <span class="mi">42</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">pytest-pymysql-snapshot-mock</a>
+    <a class='right-next' id="next-link" href="api.html" title="next page">API</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Southern African Large Telescope (SALT)<br/>
+        
+            &copy; Copyright 2022, Southern African Large Telescope (SALT).<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

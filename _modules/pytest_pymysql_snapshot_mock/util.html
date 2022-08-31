@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pytest_pymysql_snapshot_mock.util &#8212; pytest-pymysql-snapshot-mock  documentation</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">pytest-pymysql-snapshot-mock  documentation</h1>
+  
+</a>
+</div><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent" role="heading">
+ <span class="caption-text">
+  Content
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../quickstart.html">
+   Quickstart
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../api.html">
+   API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../development.html">
+   Development
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <h1>Source code for pytest_pymysql_snapshot_mock.util</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">enum</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
+
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">pytest</span> <span class="kn">import</span> <span class="n">FixtureRequest</span>
+
+
+<div class="viewcode-block" id="Mode"><a class="viewcode-back" href="../../api.html#pytest_pymysql_snapshot_mock.Mode">[docs]</a><span class="k">class</span> <span class="nc">Mode</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An enumeration of the available modes.</span>
+
+<span class="sd">    The available modes are ``STORE_DATA``, ``MOCK`` and ``NORMAL``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">STORE_DATA</span> <span class="o">=</span> <span class="s2">&quot;Store Data&quot;</span>
+    <span class="n">MOCK</span> <span class="o">=</span> <span class="s2">&quot;Mock&quot;</span>
+    <span class="n">NORMAL</span> <span class="o">=</span> <span class="s2">&quot;Normal&quot;</span></div>
+
+
+<div class="viewcode-block" id="DatabaseMock"><a class="viewcode-back" href="../../api.html#pytest_pymysql_snapshot_mock.DatabaseMock">[docs]</a><span class="k">class</span> <span class="nc">DatabaseMock</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Properties and methods for the database mock fixture.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mode: `~pytest_pymysql_snapshot_mock.util.Mode`</span>
+<span class="sd">        The mode in which the fixture is used.</span>
+<span class="sd">    db_data_dir: `~pathlib.Path`</span>
+<span class="sd">        Directory for storing the database snapshot files.</span>
+<span class="sd">    request: `~pytest.FixtureRequest`</span>
+<span class="sd">        pytest request fixture.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mode: `~pytest_pymysql_snapshot_mock.util.Mode`</span>
+<span class="sd">        The mode in which the fixture is used.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">Mode</span><span class="p">,</span>
+        <span class="n">db_data_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
+        <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_request</span> <span class="o">=</span> <span class="n">request</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data_dir</span> <span class="o">=</span> <span class="n">DatabaseMock</span><span class="o">.</span><span class="n">_test_data_dir</span><span class="p">(</span><span class="n">db_data_dir</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">Mode</span><span class="o">.</span><span class="n">MOCK</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_data</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mode</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span>
+
+<div class="viewcode-block" id="DatabaseMock.user_value"><a class="viewcode-back" href="../../api.html#pytest_pymysql_snapshot_mock.DatabaseMock.user_value">[docs]</a>    <span class="k">def</span> <span class="nf">user_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Mock a user-supplied value.</span>
+
+<span class="sd">        Some database tests may generate random values, store these in the database and</span>
+<span class="sd">        use these random values in assertions. This poses a problem for mocking as the</span>
+<span class="sd">        value will be different for each test run, so that the current and the</span>
+<span class="sd">        previously stored version differs. Hence such tests will fail when run with the</span>
+<span class="sd">        stored data.</span>
+
+<span class="sd">        The solution is to wrap random values with this method. For example:</span>
+
+<span class="sd">        .. code:: python</span>
+
+<span class="sd">           import uuid</span>
+
+<span class="sd">           random_value = database_mock.user_value(str(uuid.uuid4())</span>
+
+<span class="sd">        When database data is stored, ``value`` is stored along with the data, and it is</span>
+<span class="sd">        returned as the return value. When the database is mocked, the previously stored</span>
+<span class="sd">        stored value is returned. Otherwise the method just returns ``value``.</span>
+
+<span class="sd">        It must be possible to pickle the passed value</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value: any</span>
+<span class="sd">            Value. The value is ignored when the database is mocked.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        any</span>
+<span class="sd">            Either the previously stored value (when the database is being mocked) or</span>
+<span class="sd">            the passed value (otherwise).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">==</span> <span class="n">Mode</span><span class="o">.</span><span class="n">STORE_DATA</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;user--stored-value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">value</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">==</span> <span class="n">Mode</span><span class="o">.</span><span class="n">MOCK</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;user--stored-value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">==</span> <span class="n">Mode</span><span class="o">.</span><span class="n">NORMAL</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_test_data_dir</span><span class="p">(</span><span class="n">db_data_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span> <span class="n">request</span><span class="p">:</span> <span class="n">FixtureRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">db_data_dir</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">())</span>
+        <span class="n">parent_dir</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">rootpath</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">db_data_dir</span> <span class="o">/</span> <span class="n">parent_dir</span>
+
+    <span class="k">def</span> <span class="nf">_write_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filepath</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filepath</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_record_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_read_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_filepath</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+        <span class="c1"># Adapted from the pytest-regressions source code</span>
+        <span class="n">basename</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[\W]&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_dir</span> <span class="o">/</span> <span class="p">(</span><span class="n">basename</span> <span class="o">+</span> <span class="s2">&quot;.db&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="skip_for_db_mocking"><a class="viewcode-back" href="../../api.html#pytest_pymysql_snapshot_mock.skip_for_db_mocking">[docs]</a><span class="k">def</span> <span class="nf">skip_for_db_mocking</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Skip a test if this plugin is used.</span>
+
+<span class="sd">    Call this function from a test if you want to skip it whenever database data is</span>
+<span class="sd">    stored or mocked, i.e. if the ``--store-db-data`` or ``--mock-db-data`` command line</span>
+<span class="sd">    options are used. You might want to do this to avoid storing confidential data or to</span>
+<span class="sd">    avoid tests failing because of non-deterministic database access.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PMSM_MODE&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">Mode</span><span class="o">.</span><span class="n">NORMAL</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+        <span class="n">pytest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span>
+            <span class="s2">&quot;The skip_for_db_mocking function is used and database data is &quot;</span>
+            <span class="s2">&quot;being stored or mocked.&quot;</span>
+        <span class="p">)</span></div>
+</pre></div>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Southern African Large Telescope (SALT)<br/>
+        
+            &copy; Copyright 2022, Southern African Large Telescope (SALT).<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

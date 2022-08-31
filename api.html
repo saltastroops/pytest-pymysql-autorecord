@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>API &#8212; pytest-pymysql-snapshot-mock  documentation</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Development" href="development.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">pytest-pymysql-snapshot-mock  documentation</h1>
+  
+</a>
+</div><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent" role="heading">
+ <span class="caption-text">
+  Content
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="quickstart.html">
+   Quickstart
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="development.html">
+   Development
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/api.md.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pytest_pymysql_snapshot_mock">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pytest_pymysql_snapshot_mock
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <section id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this heading">¶</a></h1>
+<section id="module-pytest_pymysql_snapshot_mock">
+<span id="pytest-pymysql-snapshot-mock"></span><h2><code class="docutils literal notranslate"><span class="pre">pytest_pymysql_snapshot_mock</span></code><a class="headerlink" href="#module-pytest_pymysql_snapshot_mock" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytest_pymysql_snapshot_mock.DatabaseMock">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytest_pymysql_snapshot_mock.</span></span><span class="sig-name descname"><span class="pre">DatabaseMock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pytest_pymysql_snapshot_mock.Mode" title="pytest_pymysql_snapshot_mock.util.Mode"><span class="pre">Mode</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><span class="pre">Path</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FixtureRequest</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytest_pymysql_snapshot_mock/util.html#DatabaseMock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_pymysql_snapshot_mock.DatabaseMock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Properties and methods for the database mock fixture.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<a class="reference internal" href="#pytest_pymysql_snapshot_mock.Mode" title="pytest_pymysql_snapshot_mock.util.Mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mode</span></code></a>) – The mode in which the fixture is used.</p></li>
+<li><p><strong>db_data_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Path</span></code></a>) – Directory for storing the database snapshot files.</p></li>
+<li><p><strong>request</strong> (<a class="reference external" href="https://docs.pytest.org/en/stable/reference/reference.html#pytest.FixtureRequest" title="(in pytest v7.1.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FixtureRequest</span></code></a>) – pytest request fixture.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytest_pymysql_snapshot_mock.DatabaseMock.mode">
+<span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#pytest_pymysql_snapshot_mock.DatabaseMock.mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mode in which the fixture is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pytest_pymysql_snapshot_mock.Mode" title="pytest_pymysql_snapshot_mock.util.Mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mode</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytest_pymysql_snapshot_mock.DatabaseMock.user_value">
+<span class="sig-name descname"><span class="pre">user_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="_modules/pytest_pymysql_snapshot_mock/util.html#DatabaseMock.user_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_pymysql_snapshot_mock.DatabaseMock.user_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mock a user-supplied value.</p>
+<p>Some database tests may generate random values, store these in the database and
+use these random values in assertions. This poses a problem for mocking as the
+value will be different for each test run, so that the current and the
+previously stored version differs. Hence such tests will fail when run with the
+stored data.</p>
+<p>The solution is to wrap random values with this method. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uuid</span>
+
+<span class="n">random_value</span> <span class="o">=</span> <span class="n">database_mock</span><span class="o">.</span><span class="n">user_value</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>When database data is stored, <code class="docutils literal notranslate"><span class="pre">value</span></code> is stored along with the data, and it is
+returned as the return value. When the database is mocked, the previously stored
+stored value is returned. Otherwise the method just returns <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
+<p>It must be possible to pickle the passed value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>any</em>) – Value. The value is ignored when the database is mocked.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Either the previously stored value (when the database is being mocked) or
+the passed value (otherwise).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>any</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pytest_pymysql_snapshot_mock.Mode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytest_pymysql_snapshot_mock.</span></span><span class="sig-name descname"><span class="pre">Mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytest_pymysql_snapshot_mock/util.html#Mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_pymysql_snapshot_mock.Mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>An enumeration of the available modes.</p>
+<p>The available modes are <code class="docutils literal notranslate"><span class="pre">STORE_DATA</span></code>, <code class="docutils literal notranslate"><span class="pre">MOCK</span></code> and <code class="docutils literal notranslate"><span class="pre">NORMAL</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pytest_pymysql_snapshot_mock.skip_for_db_mocking">
+<span class="sig-prename descclassname"><span class="pre">pytest_pymysql_snapshot_mock.</span></span><span class="sig-name descname"><span class="pre">skip_for_db_mocking</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/pytest_pymysql_snapshot_mock/util.html#skip_for_db_mocking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytest_pymysql_snapshot_mock.skip_for_db_mocking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Skip a test if this plugin is used.</p>
+<p>Call this function from a test if you want to skip it whenever database data is
+stored or mocked, i.e. if the <code class="docutils literal notranslate"><span class="pre">--store-db-data</span></code> or <code class="docutils literal notranslate"><span class="pre">--mock-db-data</span></code> command line
+options are used. You might want to do this to avoid storing confidential data or to
+avoid tests failing because of non-deterministic database access.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="quickstart.html" title="previous page">Quickstart</a>
+    <a class='right-next' id="next-link" href="development.html" title="next page">Development</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Southern African Large Telescope (SALT)<br/>
+        
+            &copy; Copyright 2022, Southern African Large Telescope (SALT).<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
