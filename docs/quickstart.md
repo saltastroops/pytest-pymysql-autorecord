@@ -17,7 +17,7 @@ As the name suggests, pytest-pymysql-snapshot-mock is a pytest plugin for mockin
 Real-world business data has a tendency of being confidential. A stern warning is thus in order:
 
 ```{warning}
-This plugin stores database data in files which are intended to be under version control and as such might end up under version control. Make sure you don't use it when requesting confidential data, or that the project using the plugin is not availsable on a public repository.
+This plugin stores database data in files which are intended to be under version control and as such might end up under version control. Make sure you don't use it when requesting confidential data, or that the project using the plugin is not availsable on a public repository. As explained below, there is a way to skip tests in case this plugin is used.
 ```
 
 It might be a good idea to test against a database whose (still real-world) data has been sanitized, with confidential data such as email addresses and password hashes having been replaced.
@@ -94,4 +94,22 @@ def test_create_user(database_mock):
 
 ```{warning}
 When you use the `user_value` method, you have to store the database data again. Otherwise you might get an error about popping from an empty list.
+```
+
+## Skipping tests
+
+There are cases where you cannot use database mocking. For example, you might be concerned about storing confidential data, or a test might access the database non-deterministically.
+
+Such tests should be skipped whenever database data is being stored or mocked. You can achieve this by calling the `skip_for_db_mocking` function.
+
+```python
+from pytest_pymysql_snapshot_mock import skip_for_db_mocking
+
+def f():
+    return confidential_data_from_database()
+
+def test_some_non_deterministic_function():
+    skip_for_db_mocking()
+
+    assert f() == 42
 ```

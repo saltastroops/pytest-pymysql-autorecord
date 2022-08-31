@@ -1,11 +1,13 @@
 import enum
+import os
 import pickle
 import re
 import tempfile
 from collections import defaultdict
 from pathlib import Path
-from typing import Any, Dict, List, cast
+from typing import Any, Dict, List, Optional, cast
 
+import pytest
 from pytest import FixtureRequest
 
 
@@ -42,7 +44,7 @@ class DatabaseMock:
     def __init__(
         self,
         mode: Mode,
-        db_data_dir: Path,
+        db_data_dir: Optional[Path],
         request: FixtureRequest,
     ):
         self._mode = mode
@@ -103,7 +105,7 @@ class DatabaseMock:
             return value
 
     @staticmethod
-    def _test_data_dir(db_data_dir: Path, request: FixtureRequest) -> Path:
+    def _test_data_dir(db_data_dir: Optional[Path], request: FixtureRequest) -> Path:
         if not db_data_dir:
             return Path(tempfile.gettempdir())
         parent_dir = request.path.parent.relative_to(request.config.rootpath)
@@ -131,3 +133,19 @@ class DatabaseMock:
         self._data_dir.mkdir(parents=True, exist_ok=True)
 
         return self._data_dir / (basename + ".db")
+
+
+def skip_for_db_mocking() -> None:
+    """
+    Skip a test if this plugin is used.
+
+    Call this function from a test if you want to skip it whenever database data is
+    stored or mocked, i.e. if the ``--store-db-data`` or ``--mock-db-data`` command line
+    options are used. You might want to do this to avoid storing confidential data or to
+    avoid tests failing because of non-deterministic database access.
+    """
+    if os.getenv("PMSM_MODE") != Mode.NORMAL.value:
+        pytest.skip(
+            "The skip_for_db_mocking function is used and database data is "
+            "being stored or mocked."
+        )
