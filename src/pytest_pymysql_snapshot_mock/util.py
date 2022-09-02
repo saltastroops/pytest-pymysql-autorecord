@@ -109,7 +109,8 @@ class DatabaseMock:
         if not db_data_dir:
             return Path(tempfile.gettempdir())
         parent_dir = request.path.parent.relative_to(request.config.rootpath)
-        return db_data_dir / parent_dir
+        node_dir = Path(request.module.__file__).stem
+        return db_data_dir / parent_dir / node_dir
 
     def _write_data(self) -> None:
         filepath = self._filepath()
