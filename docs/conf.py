@@ -2,7 +2,7 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath("../src"))
 
-project = 'pytest-pymysql-snapshot-mock'
+project = 'pytest-pymysql-autorecord'
 copyright = '2022, Southern African Large Telescope (SALT)'
 author = 'Southern African Large Telescope (SALT)'
 extensions = [

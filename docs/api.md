@@ -1,8 +1,8 @@
 # API
 
-## `pytest_pymysql_snapshot_mock`
+## `pytest_pymysql_autorecord`
 
 ```{eval-rst}
-.. automodule:: pytest_pymysql_snapshot_mock
+.. automodule:: pytest_pymysql_autorecord
     :members:
 ```

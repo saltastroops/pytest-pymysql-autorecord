@@ -2,7 +2,7 @@
 
 ## Developing the package
 
-If you want to work on pytest-pymysql-snapshot-mock, you should first clone its repository.
+If you want to work on pytest-pymysql-autorecord, you should first clone its repository.
 
 Afterwards, change into the cloned directory, create and activate a virtual environment, and install the required Python libraries.
 
@@ -25,7 +25,7 @@ To check the code before pushing it to the repository you can use the script `ch
 
 ### Publishing manually
 
-In order to publish pytest-pymysql-snapshot-mock from your machine, first install twine, if you haven't done so already:
+In order to publish pytest-pymysql-autorecord from your machine, first install twine, if you haven't done so already:
 
 ```shell
 pipx install twine
@@ -68,7 +68,7 @@ You can then use twine to upload the package:
 twine upload -r https://pypi.example.com dist/*
 ```
 
-Afterwards you can install pytest-pymysql-snapshot-mock from your PyPI server with
+Afterwards you can install pytest-pymysql-autorecord from your PyPI server with
 
 ```shell
 python -m pip install --index-url https://pypi.example.com/
@@ -80,10 +80,10 @@ Upload the package to [Test PyPI](https://packaging.python.org/guides/using-test
 twine upload -r testpypi dist/*
 ```
 
-You can then install pytest-pymysql-snapshot-mock from Test PyPI with
+You can then install pytest-pymysql-autorecord from Test PyPI with
 
 ```shell
-python -m pip install --extra-index-url https://test.pypi.org/simple/ pytest-pymysql-snapshot-mock
+python -m pip install --extra-index-url https://test.pypi.org/simple/ pytest-pymysql-autorecord
 ```
 
 ```{warning}

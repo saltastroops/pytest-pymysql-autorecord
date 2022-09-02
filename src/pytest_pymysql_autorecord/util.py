@@ -28,16 +28,16 @@ class DatabaseMock:
 
     Parameters
     ----------
-    mode: `~pytest_pymysql_snapshot_mock.util.Mode`
+    mode: `~pytest_pymysql_autorecord.util.Mode`
         The mode in which the fixture is used.
     db_data_dir: `~pathlib.Path`
-        Directory for storing the database snapshot files.
+        Directory for storing the recorded data files.
     request: `~pytest.FixtureRequest`
         pytest request fixture.
 
     Attributes
     ----------
-    mode: `~pytest_pymysql_snapshot_mock.util.Mode`
+    mode: `~pytest_pymysql_autorecord.util.Mode`
         The mode in which the fixture is used.
     """
 
@@ -109,7 +109,8 @@ class DatabaseMock:
         if not db_data_dir:
             return Path(tempfile.gettempdir())
         parent_dir = request.path.parent.relative_to(request.config.rootpath)
-        return db_data_dir / parent_dir
+        node_dir = Path(request.module.__file__).stem
+        return db_data_dir / parent_dir / node_dir
 
     def _write_data(self) -> None:
         filepath = self._filepath()

@@ -545,7 +545,7 @@ def mock_connect(database_mock: DatabaseMock, real_connect: Any) -> Any:
 
     Parameters
     ----------
-    database_mock: `~pytest_pymysql_snapshot_mock.util.DatabaseMockFixture`
+    database_mock: `~pytest_pymysql_autorecord.util.DatabaseMockFixture`
         Database mock fixture.
     real_connect: function
         PyMySQL's connect function.
