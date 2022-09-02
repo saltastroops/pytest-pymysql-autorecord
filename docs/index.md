@@ -1,4 +1,4 @@
-# pytest-pymysql-snapshot-mock
+# pytest-pymysql-autorecord
 
 A plugin for mocking with recorded database data.
 

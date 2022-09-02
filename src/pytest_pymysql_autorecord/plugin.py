@@ -19,7 +19,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     parser: `pytest.Parser`
         Option parser.
     """
-    group = parser.getgroup("pytest-pymysql-snapshot-mock")
+    group = parser.getgroup("pytest-pymysql-autorecord")
     group.addoption(
         "--store-db-data",
         action="store_true",
@@ -36,7 +36,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         "--db-data-dir",
         action="store",
         dest="db_data_dir",
-        help="Directory where to store the snapshots for database mocking.",
+        help="Directory where to store the recorded data files.",
     )
 
 
@@ -62,7 +62,7 @@ def database_mock(
 
     The ``--store-db-data`` and ``--mock-db-data`` flag cannot be used together. If you
     use either of them, you have to use the ``--db-data-dir`` flag as well. Its value
-    must be the path of the directory where the snapshot files are stored. This
+    must be the path of the directory where the recorded data files are stored. This
     directory is created if necessary. Alternatively, you can set the environment
     variable ``PMSM_DB_DATA_DIR``.
 

@@ -1,3 +1,3 @@
-# pytest-pymysql-snapshot-mock
+# pytest-pymysql-autorecording
 
 Mock PyMySQL with snapshots.
