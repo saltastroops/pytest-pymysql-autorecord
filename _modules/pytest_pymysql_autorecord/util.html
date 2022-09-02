@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pytest_pymysql_snapshot_mock.util &#8212; pytest-pymysql-snapshot-mock  documentation</title>
+    <title>pytest_pymysql_autorecord.util &#8212; pytest-pymysql-autorecord  documentation</title>
     
   <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -64,7 +64,7 @@
 <a class="navbar-brand text-wrap" href="../../index.html">
   
   
-  <h1 class="site-logo" id="site-title">pytest-pymysql-snapshot-mock  documentation</h1>
+  <h1 class="site-logo" id="site-title">pytest-pymysql-autorecord  documentation</h1>
   
 </a>
 </div><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
@@ -139,7 +139,7 @@
         
               <div>
                 
-  <h1>Source code for pytest_pymysql_snapshot_mock.util</h1><div class="highlight"><pre>
+  <h1>Source code for pytest_pymysql_autorecord.util</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">enum</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
@@ -153,7 +153,7 @@
 <span class="kn">from</span> <span class="nn">pytest</span> <span class="kn">import</span> <span class="n">FixtureRequest</span>
 
 
-<div class="viewcode-block" id="Mode"><a class="viewcode-back" href="../../api.html#pytest_pymysql_snapshot_mock.Mode">[docs]</a><span class="k">class</span> <span class="nc">Mode</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="Mode"><a class="viewcode-back" href="../../api.html#pytest_pymysql_autorecord.Mode">[docs]</a><span class="k">class</span> <span class="nc">Mode</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;An enumeration of the available modes.</span>
 
 <span class="sd">    The available modes are ``STORE_DATA``, ``MOCK`` and ``NORMAL``.</span>
@@ -164,22 +164,22 @@
     <span class="n">NORMAL</span> <span class="o">=</span> <span class="s2">&quot;Normal&quot;</span></div>
 
 
-<div class="viewcode-block" id="DatabaseMock"><a class="viewcode-back" href="../../api.html#pytest_pymysql_snapshot_mock.DatabaseMock">[docs]</a><span class="k">class</span> <span class="nc">DatabaseMock</span><span class="p">:</span>
+<div class="viewcode-block" id="DatabaseMock"><a class="viewcode-back" href="../../api.html#pytest_pymysql_autorecord.DatabaseMock">[docs]</a><span class="k">class</span> <span class="nc">DatabaseMock</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Properties and methods for the database mock fixture.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    mode: `~pytest_pymysql_snapshot_mock.util.Mode`</span>
+<span class="sd">    mode: `~pytest_pymysql_autorecord.util.Mode`</span>
 <span class="sd">        The mode in which the fixture is used.</span>
 <span class="sd">    db_data_dir: `~pathlib.Path`</span>
-<span class="sd">        Directory for storing the database snapshot files.</span>
+<span class="sd">        Directory for storing the recorded data files.</span>
 <span class="sd">    request: `~pytest.FixtureRequest`</span>
 <span class="sd">        pytest request fixture.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    mode: `~pytest_pymysql_snapshot_mock.util.Mode`</span>
+<span class="sd">    mode: `~pytest_pymysql_autorecord.util.Mode`</span>
 <span class="sd">        The mode in which the fixture is used.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -202,7 +202,7 @@
     <span class="k">def</span> <span class="nf">mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mode</span><span class="p">:</span>  <span class="c1"># noqa: D102</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span>
 
-<div class="viewcode-block" id="DatabaseMock.user_value"><a class="viewcode-back" href="../../api.html#pytest_pymysql_snapshot_mock.DatabaseMock.user_value">[docs]</a>    <span class="k">def</span> <span class="nf">user_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<div class="viewcode-block" id="DatabaseMock.user_value"><a class="viewcode-back" href="../../api.html#pytest_pymysql_autorecord.DatabaseMock.user_value">[docs]</a>    <span class="k">def</span> <span class="nf">user_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Mock a user-supplied value.</span>
 
@@ -251,7 +251,8 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">db_data_dir</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">())</span>
         <span class="n">parent_dir</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">rootpath</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">db_data_dir</span> <span class="o">/</span> <span class="n">parent_dir</span>
+        <span class="n">node_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span>
+        <span class="k">return</span> <span class="n">db_data_dir</span> <span class="o">/</span> <span class="n">parent_dir</span> <span class="o">/</span> <span class="n">node_dir</span>
 
     <span class="k">def</span> <span class="nf">_write_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">filepath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filepath</span><span class="p">()</span>
@@ -277,7 +278,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_dir</span> <span class="o">/</span> <span class="p">(</span><span class="n">basename</span> <span class="o">+</span> <span class="s2">&quot;.db&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="skip_for_db_mocking"><a class="viewcode-back" href="../../api.html#pytest_pymysql_snapshot_mock.skip_for_db_mocking">[docs]</a><span class="k">def</span> <span class="nf">skip_for_db_mocking</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="skip_for_db_mocking"><a class="viewcode-back" href="../../api.html#pytest_pymysql_autorecord.skip_for_db_mocking">[docs]</a><span class="k">def</span> <span class="nf">skip_for_db_mocking</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Skip a test if this plugin is used.</span>
 

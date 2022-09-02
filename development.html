@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Development &#8212; pytest-pymysql-snapshot-mock  documentation</title>
+    <title>Development &#8212; pytest-pymysql-autorecord  documentation</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -66,7 +66,7 @@
 <a class="navbar-brand text-wrap" href="index.html">
   
   
-  <h1 class="site-logo" id="site-title">pytest-pymysql-snapshot-mock  documentation</h1>
+  <h1 class="site-logo" id="site-title">pytest-pymysql-autorecord  documentation</h1>
   
 </a>
 </div><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
@@ -188,7 +188,7 @@
 <h1>Development<a class="headerlink" href="#development" title="Permalink to this heading">¶</a></h1>
 <section id="developing-the-package">
 <h2>Developing the package<a class="headerlink" href="#developing-the-package" title="Permalink to this heading">¶</a></h2>
-<p>If you want to work on pytest-pymysql-snapshot-mock, you should first clone its repository.</p>
+<p>If you want to work on pytest-pymysql-autorecord, you should first clone its repository.</p>
 <p>Afterwards, change into the cloned directory, create and activate a virtual environment, and install the required Python libraries.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /path/to/dir
 python -m venv .venv
@@ -206,7 +206,7 @@ python -m pip install -r requirements-dev.txt
 <h2>Publishing the package<a class="headerlink" href="#publishing-the-package" title="Permalink to this heading">¶</a></h2>
 <section id="publishing-manually">
 <h3>Publishing manually<a class="headerlink" href="#publishing-manually" title="Permalink to this heading">¶</a></h3>
-<p>In order to publish pytest-pymysql-snapshot-mock from your machine, first install twine, if you haven’t done so already:</p>
+<p>In order to publish pytest-pymysql-autorecord from your machine, first install twine, if you haven’t done so already:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pipx install twine
 </pre></div>
 </div>
@@ -239,7 +239,7 @@ python -m pip install -r requirements-dev.txt
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>twine upload -r https://pypi.example.com dist/*
 </pre></div>
 </div>
-<p>Afterwards you can install pytest-pymysql-snapshot-mock from your PyPI server with</p>
+<p>Afterwards you can install pytest-pymysql-autorecord from your PyPI server with</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m pip install --index-url https://pypi.example.com/
 </pre></div>
 </div>
@@ -247,8 +247,8 @@ python -m pip install -r requirements-dev.txt
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>twine upload -r testpypi dist/*
 </pre></div>
 </div>
-<p>You can then install pytest-pymysql-snapshot-mock from Test PyPI with</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m pip install --extra-index-url https://test.pypi.org/simple/ pytest-pymysql-snapshot-mock
+<p>You can then install pytest-pymysql-autorecord from Test PyPI with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m pip install --extra-index-url https://test.pypi.org/simple/ pytest-pymysql-autorecord
 </pre></div>
 </div>
 <div class="admonition warning">
