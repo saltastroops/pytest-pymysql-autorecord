@@ -34,6 +34,8 @@ An important limitation should also be pointed out:
 This plugin currently only works the first time you connect to a SQL Alchemy database engine. You therefore have to make sure that you create a new engine for every test.
 ```
 
+If you use a pytest fixture to handle your database connection, it may happen that database queries are still executed after `pytest-mysql-autorecord` has written its data to file. In this case you will get an `IndexError` ("pop from empty list") when mocking. However, as at that point the test function itself has finished, the test still passes, albeit with a warning. It should generally be safe to ignore such warnings.
+
 ## Installation
 
 You can install the plugin in the usual way with pip:
